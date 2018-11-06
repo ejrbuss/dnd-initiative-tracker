@@ -1,0 +1,28 @@
+{
+  "name": "dnd-initiative-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && open ./index.html",
+    "test": "jest --coverage",
+    "build": "tsc && webpack ./target/index.js -o ./dist/bundle.js --mode=\"development\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejrbuss/dnd-initiative-tracker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ejrbuss/dnd-initiative-tracker/issues"
+  },
+  "homepage": "https://github.com/ejrbuss/dnd-initiative-tracker#readme",
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "@types/jquery": "^3.3.22",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.4",
+    "typescript": "^3.1.6"
+  }
+}
