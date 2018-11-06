@@ -5,24 +5,49 @@ import { Render } from './Render';
 
 export interface State {
     tracker: Tracker;
-    selected?: Actor;
+    selected: Actor | null;
     output: string[];
 }
 
+interface LogOptions {
+    success?: boolean;
+    error?: boolean;
+}
+
 const states: State[] = [
-    { tracker: Tracker.init(), output: [] }
+    { tracker: Tracker.init(), selected: null, output: [] }
 ];
 const undoStack: State[] = [];
 
 const merge = (partial: Partial<State>) => {
-    states.push(Util.merge(get(), partial));
-    console.log('New State: ', get());
+    const nextState = Util.merge(get(), partial);
+    if (!Util.eq(get(), nextState)) {
+        states.push(nextState);
+        console.log('New State: ', get());
+    }
 };
 
-const update = (fn: (state: State) => Partial<State> | undefined) => {
-    const newState = fn(get());
-    if (newState) {
-        merge(newState);
+const update = (fn: (state: State) => (undefined
+    | [Partial<State>]
+    | [Partial<State>, string] 
+    | [Partial<State>, string, LogOptions]
+)) => {
+    const result = fn(get());
+    if (result) {
+        let [state, log, options] = result as [Partial<State>, string, LogOptions];
+        if (log) {
+            console.log(log);
+            if (options && options.success) {
+                log = `<span class="text-primary">${log}</span>`;
+            }
+            if (options && options.error) {
+                log = `<span class="text-danger">${log}</span>`;
+            }
+            state = Util.merge(state, { output: [log, ...state.output || get().output] });
+        }
+        if (state) {
+            merge(state);
+        }
     }
     Render.update(get());
 };

@@ -40,10 +40,17 @@ const lt = <T>(a: T, b: T, comparator: Comparator<T>): boolean =>
 const gt = <T>(a: T, b: T, comparator: Comparator<T>): boolean =>
     comparator(a, b) < 0;
 
+const keycodes = {
+    enter: 13,
+    up: 38,
+    down: 39,
+};
+
 export const Util = {
     merge,
     eq,
     lt,
     gt,
     rand,
+    keycodes,
 }

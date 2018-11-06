@@ -1,5 +1,9 @@
 import { State } from './State';
 import { Tracker } from './Tracker';
+import { Converter } from 'showdown';
+import { Template } from './Template';
+const converter = new Converter();
+converter.setFlavor('github');
 const update = (state) => {
     updateInitiativeTable(state);
     updateDetails(state);
@@ -8,7 +12,11 @@ const update = (state) => {
     $('.actor-row').click(function (e) {
         State.update(state => {
             const id = parseInt(this.id);
-            return { selected: state.tracker.actors.find(actor => actor.uid === id) };
+            const actor = state.tracker.actors.find(actor => actor.uid === id);
+            if (actor) {
+                Template.set(actor, 'edit');
+                return [{ selected: actor }];
+            }
         });
     });
 };
@@ -34,7 +42,7 @@ const updateDetails = (state) => {
         $('#name').text(actor.name);
         $('#initiative').text(actor.initiative.toFixed(0));
         $('#hit-points').text(actor.npc ? actor.npc.hitPoints : 'N/A');
-        $('#description').text(actor.description);
+        $('#description').html(converter.makeHtml(actor.description));
         $('#notes').val(actor.note);
     }
     else {

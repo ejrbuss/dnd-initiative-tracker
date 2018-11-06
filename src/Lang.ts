@@ -1,7 +1,8 @@
 import { Util } from './util';
-import { API } from './API';
 
-export const evaluate = (source: string): string => {
+const env: { [name: string]: string } = {};
+
+export const evaluate = (source: string, api?: any): string => {
     const transform = source
         // Remove whitespace
         .replace(/\s*/g, '')
@@ -14,48 +15,52 @@ export const evaluate = (source: string): string => {
         })
         // Perform math ops in order */+-
         .replace(/(\d+)\*(\d+)/g, (_, a, b) => {
-            return (parseInt(a) * parseInt(b)).toString()
+            return (parseInt(a) * parseInt(b)).toString();
         })
         .replace(/(\d+)\/(\d+)/g, (_, a, b) => {
-            return (parseInt(a) / parseInt(b)).toString()
+            return (parseInt(a) / parseInt(b)).toString();
         })
         .replace(/(\d+)\+(\d+)/g, (_, a, b) => {
-            return (parseInt(a) + parseInt(b)).toString()
+            return (parseInt(a) + parseInt(b)).toString();
         })
         .replace(/(\d+)\-(\d+)/g, (_, a, b) => {
-            return (parseInt(a) - parseInt(b)).toString()
+            return (parseInt(a) - parseInt(b)).toString();
+        })
+        .replace(/max(\d+),(\d+)/g, (_, a, b) => {
+            return (Math.max(parseInt(a), parseInt(b))).toString();
+        })
+        .replace(/min(\d+),(\d+)/g, (_, a, b) => {
+            return (Math.min(parseInt(a), parseInt(b))).toString();
         })
         // Unwrap parens last
         .replace(/\((\d+)\)/g, (_, num) => {
             return num;
         })
         .replace(/hp\+(\d+)/g, (_, num) => {
-            API.changeHitPoints(parseInt(num));
+            api.changeHitPoints(parseInt(num));
             return '';
         })
         .replace(/hp-(\d+)/g, (_, num) => {
-            API.changeHitPoints(-parseInt(num));
+            api.changeHitPoints(-parseInt(num));
             return '';
         })
-        .replace(/remove/g, () => {
-            API.removeSelected();
+        .replace(/jump|remove|next|previous|reset|clear|undo|redo/g, command => {
+            api[command
+                .replace('jump', 'jumpSelected')
+                .replace('remove', 'removeSelected')
+            ]();
             return '';
         })
-        .replace(/next/g, () => {
-            API.next();
-            return '';
+        // Lets make a little programming language
+        .replace(/\\(\w+)\{(.*)\}:(\w+)/g, (_, para, body, arg) => {
+            return body.replace(new RegExp(para, 'g'), arg);
         })
-        .replace(/previous/g, () => {
-            API.previous();
-            return '';
+        .replace(/(\$\w+)=(.*)/g, (_, name, value) => {
+            env[name] = value;
+            return value;
         })
-        .replace(/undo/g, () => {
-            API.undo();
-            return '';
-        })
-        .replace(/redo/g, () => {
-            API.redo();
-            return '';
+        .replace(/\$\w+/g, name => {
+            return env[name];
         })
         ;
     // Recurse on transform to fully evaluate
