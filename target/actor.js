@@ -25,4 +25,4 @@ const init = (template) => {
 const epsilon = 0.001;
 const after = (a, b) => Util.merge(a, { initiative: b.initiative - epsilon });
 const before = (a, b) => Util.merge(a, { initiative: b.initiative + epsilon });
-export const Actor = { init, after, before };
+export const Actor = { uidCounter, init, after, before };

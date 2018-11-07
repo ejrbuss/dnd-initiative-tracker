@@ -30,7 +30,7 @@ const gt = (a, b, comparator) => comparator(a, b) < 0;
 const keycodes = {
     enter: 13,
     up: 38,
-    down: 39,
+    down: 40,
 };
 export const Util = {
     merge,

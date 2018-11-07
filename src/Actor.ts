@@ -47,4 +47,4 @@ const after = (a: Actor, b: Actor): Actor =>
 const before = (a: Actor, b: Actor): Actor =>
     Util.merge(a, { initiative: b.initiative + epsilon });
 
-export const Actor = { init, after, before };
+export const Actor = { uidCounter, init, after, before };

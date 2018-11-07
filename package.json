@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && open ./index.html",
     "test": "jest --coverage",
-    "build": "tsc && webpack ./target/index.js -o ./dist/bundle.js --mode=\"development\""
+    "build": "tsc && webpack ./target/index.js -o ./dist/bundle.js --mode=\"development\"",
+    "start": "npm run build && open ./index.html",
+    "dist": "npm run build && cp ./index.html ./docs/index.html && cp -r ./dist ./docs/dist && open ./docs/index.html"
   },
   "repository": {
     "type": "git",

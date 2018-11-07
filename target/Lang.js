@@ -6,7 +6,10 @@ export const evaluate = (source, api) => {
         .replace(/\s*/g, '')
         // Dice replacement
         .replace(/(\d+)d(\d+)/g, (_, mult, die) => {
-        return (parseInt(mult) * Util.rand(1, parseInt(die) + 1)).toString();
+        return (new Array(parseInt(mult)).fill(0))
+            .map(() => Util.rand(1, parseInt(die) + 1))
+            .reduce((a, b) => a + b)
+            .toString();
     })
         .replace(/d(\d+)/g, (_, die) => {
         return Util.rand(1, parseInt(die) + 1).toString();
@@ -42,16 +45,13 @@ export const evaluate = (source, api) => {
         api.changeHitPoints(-parseInt(num));
         return '';
     })
-        .replace(/jump|remove|next|previous|reset|clear|undo|redo/g, command => {
+        .replace(/jump|remove|next|previous|reset|reboot|clear|undo|redo|help/g, command => {
         api[command
             .replace('jump', 'jumpSelected')
             .replace('remove', 'removeSelected')]();
         return '';
     })
-        // Lets make a little programming language
-        .replace(/\\(\w+)\{(.*)\}:(\w+)/g, (_, para, body, arg) => {
-        return body.replace(new RegExp(para, 'g'), arg);
-    })
+        // Simple variables
         .replace(/(\$\w+)=(.*)/g, (_, name, value) => {
         env[name] = value;
         return value;

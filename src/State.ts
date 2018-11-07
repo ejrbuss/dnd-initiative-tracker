@@ -24,6 +24,19 @@ const merge = (partial: Partial<State>) => {
     if (!Util.eq(get(), nextState)) {
         states.push(nextState);
         console.log('New State: ', get());
+        save();
+    }
+};
+
+const save = () => {
+    localStorage.setItem('state', JSON.stringify(get()));
+};
+
+const load = () => {
+    const result = localStorage.getItem('state');
+    if (result) {
+        merge(JSON.parse(result));
+        Actor.uidCounter = Math.max(...get().tracker.actors.map(actor => actor.uid)) + 1;
     }
 };
 
@@ -73,4 +86,4 @@ const redo = (): void => {
     Render.update(get());
 };
 
-export const State = { update, merge, get, undo, redo }
+export const State = { update, merge, load, get, undo, redo }

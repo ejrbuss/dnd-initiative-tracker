@@ -55,23 +55,27 @@ const jump = (actor: Actor) => {
 
 const next = () => {
     State.update(state => {
-        const tracker = Tracker.next(state.tracker);
-        return [
-            { tracker, selected: Tracker.current(tracker) },
-            `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
-            { success: true },
-        ];
+        if (state.tracker.actors.length > 0) {
+            const tracker = Tracker.next(state.tracker);
+            return [
+                { tracker, selected: Tracker.current(tracker) },
+                `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
+                { success: true },
+            ];
+        }
     });
 };
 
 const previous = () => {
     State.update(state => {
-        const tracker = Tracker.previous(state.tracker);
-        return [
-            { tracker, selected: Tracker.current(tracker) },
-            `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
-            { success: true },
-        ];
+        if (state.tracker.actors.length > 0) {
+            const tracker = Tracker.previous(state.tracker);
+            return [
+                { tracker, selected: Tracker.current(tracker) },
+                `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
+                { success: true },
+            ];
+        }
     });
 };
 
@@ -84,6 +88,10 @@ const reset = () => {
             { success: true },
         ];
     });
+};
+
+const reboot = () => {
+    State.update(() => [{ tracker: Tracker.init(), selected: null, output: [] }]);
 };
 
 const changeHitPoints = (num: number) => {
@@ -122,6 +130,10 @@ const clear = () => {
     });
 };
 
+const help = () => {
+    API.print($('#help').html());
+};
+
 export const API = {
     duplicate,
     remove,
@@ -129,9 +141,11 @@ export const API = {
     next,
     previous,
     reset,
+    reboot,
     changeHitPoints,
     print,
     clear,
+    help,
     duplicateSelected: withSelected(duplicate),
     removeSelected: withSelected(remove),
     jumpSelected: withSelected(jump),

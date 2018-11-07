@@ -17,14 +17,35 @@ global.Render = Render;
 global.API = API;
 // Jquery initializations
 $(document).ready(() => {
+    let commandsUp = [];
+    let commandsDown = [];
     // Process commands
-    $('#command').keypress(e => {
+    $('#command').keydown(e => {
         if (e.which === Util.keycodes.enter) {
             const input = $('#command').val();
             const output = Lang.evaluate(input, API);
+            commandsUp.push(input);
+            commandsUp = commandsUp.filter(command => command);
+            commandsDown = commandsDown.filter(command => command);
             $('#command').val('');
             if (output) {
                 API.print(`${input} <i class="fas fa-arrow-right"></i> ${output}`);
+            }
+        }
+        if (e.which === Util.keycodes.up) {
+            console.log(commandsUp, commandsDown);
+            const text = commandsUp.pop();
+            if (text !== undefined) {
+                commandsDown.push($('#command').val());
+                $('#command').val(text);
+            }
+        }
+        if (e.which === Util.keycodes.down) {
+            console.log(commandsUp, commandsDown);
+            const text = commandsDown.pop();
+            if (text !== undefined) {
+                commandsUp.push($('#command').val());
+                $('#command').val(text);
             }
         }
     });
@@ -34,6 +55,7 @@ $(document).ready(() => {
     $('#add-success').hide();
     $('#edit-error').hide();
     $('#import-error').hide();
+    $('#help').hide();
     $('#add-npc').change(() => {
         if ($('#add-npc').is(':checked')) {
             $('#add-hit-points-group').show();
@@ -126,8 +148,9 @@ $(document).ready(() => {
             $('#import-error').show();
         }
     });
+    // Load from local storage
+    Template.load();
+    State.load();
     // Initial Render
     Render.update(State.get());
-    // Initial Templates
-    Template.update();
 });

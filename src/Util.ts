@@ -43,7 +43,7 @@ const gt = <T>(a: T, b: T, comparator: Comparator<T>): boolean =>
 const keycodes = {
     enter: 13,
     up: 38,
-    down: 39,
+    down: 40,
 };
 
 export const Util = {
