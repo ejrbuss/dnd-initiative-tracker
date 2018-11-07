@@ -4,6 +4,8 @@ const env: { [name: string]: string } = {};
 
 export const evaluate = (source: string, api?: any): string => {
     const transform = source
+        // mobile
+        .toLowerCase()
         // Remove whitespace
         .replace(/\s*/g, '')
         // Dice replacement

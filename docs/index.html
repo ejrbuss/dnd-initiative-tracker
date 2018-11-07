@@ -41,7 +41,7 @@
         <img class="bg-img" src="dist/background.png">
         <div class="container">
             <div class="row mt-5">
-                <div class="col-1"></div>
+                <div class="col-1 d-sm-none"></div>
                 <div class="col-12">
                     <div class="row">
                         <div class="col-8">
@@ -60,18 +60,20 @@
                                         Initiative Order
                                         <button id="reset" type="button" class="btn mb-1"><i class="fas fa-sync-alt"></i></button>
                                     </h4>
-                                    <table class="table table-hover">
+                                    <table class="table">
                                         <thead></thead>
                                             <th>Name</th>
-                                            <th>Hit Points</th>
-                                        <tbody id="initiative-table"></tbody>
+                                            <th class="d-none d-md-block">Hit Points</th>
+                                        <tbody id="initiative-table" class="table-hover"></tbody>
                                     </table>
                                     <hr />
-                                    <p class="text-center">
-                                        <button id="previous" type="button" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i></button>
-                                        <button data-toggle="modal" data-target="#add" type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button>
-                                        <button id="next" type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button>
-                                    </p>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button id="previous" type="button" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i></button>
+                                            <button data-toggle="modal" data-target="#add" type="button" class="btn btn-outline-primary"><i class="fas fa-plus"></i></button>
+                                            <button id="next" type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <div id="details">
@@ -109,7 +111,7 @@
                         <p id="output"></p>
                     </div>
                 </div>
-                <div class="col-1"></div>
+                <div class="col-1 d-sm-none"></div>
             </div>
         </div>
 

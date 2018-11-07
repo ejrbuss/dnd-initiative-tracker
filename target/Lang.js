@@ -2,6 +2,8 @@ import { Util } from './util';
 const env = {};
 export const evaluate = (source, api) => {
     const transform = source
+        // mobile
+        .toLowerCase()
         // Remove whitespace
         .replace(/\s*/g, '')
         // Dice replacement

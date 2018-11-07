@@ -36,7 +36,7 @@ const updateInitiativeTable = (state: State) => {
                     : ''
                 }">
                 <td>${actor.name}</td>
-                <td>${actor.npc ? actor.npc.hitPoints : ''}</td>
+                <td class="d-none d-md-block">${actor.npc ? actor.npc.hitPoints : ''}</td>
             </tr>
         `);
     }
