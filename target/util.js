@@ -10,33 +10,15 @@ const merge = (full, partial) => {
         return partial;
     }
     const copy = {};
-    Object.keys(full).forEach(key => {
-        copy[key] = merge(full[key], partial[key]);
-    });
-    Object.keys(partial).forEach(key => {
-        copy[key] = merge(full[key], partial[key]);
-    });
+    const copyKeys = (key) => copy[key] = merge(full[key], partial[key]);
+    Object.keys(full).forEach(copyKeys);
+    Object.keys(partial).forEach(copyKeys);
     return copy;
 };
 const rand = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-const eq = (a, b, comparator) => {
-    if (comparator) {
-        return comparator(a, b) === 0;
-    }
-    return JSON.stringify(a) === JSON.stringify(b);
-};
-const lt = (a, b, comparator) => comparator(a, b) > 0;
-const gt = (a, b, comparator) => comparator(a, b) < 0;
-const keycodes = {
-    enter: 13,
-    up: 38,
-    down: 40,
-};
+const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 export const Util = {
     merge,
     eq,
-    lt,
-    gt,
     rand,
-    keycodes,
 };

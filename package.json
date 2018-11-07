@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
     "build": "tsc && webpack ./target/index.js -o ./dist/bundle.js --mode=\"development\"",
     "start": "npm run build && open ./index.html",
     "dist": "npm run build && cp ./index.html ./docs/index.html && cp ./dist/bundle.js ./docs/dist/bundle.js && open ./docs/index.html"

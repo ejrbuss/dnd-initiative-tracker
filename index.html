@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <style>
 
+            #logo {
+                width: 1.5em;
+            }
             .modal textarea {
                 font-family:monospace;
             }
@@ -45,7 +48,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-8">
-                            <h1>D&D Initiative Tracker</h1>
+                            <h1><img id="logo" class="mr-1 mb-2" src='dist/logo.png'/>D&D Initiative Tracker</h1>
                         </div>
                         <div class="col-4 text-right mb-0 mt-3">
                             <button type="button" data-toggle="modal" data-target="#import" class="btn">Import <i class="fas fa-file-import"></i></button>
@@ -268,7 +271,7 @@
                                 <td width="35%">eg. <code>2d4</code>, <code>d20</code>
                             </tr>
                             <tr>
-                                <td><code># <op> #</code></td>
+                                <td><code># op #</code></td>
                                 <td>Do some math!</td>
                                 <td>eg. <code>4 * 5</code>, <code>3 + (d20 / 2)</code>, <code>max 7, 2d6</code>
                             </tr>
@@ -325,8 +328,11 @@
     
         <footer class="footer small">
             <div class="container text-center">
-                <p class="text-muted">Built with <i class="fas fa-heart"></i> by <a href="https://ejrbuss.net">ejrbuss</a><br />
+                <p class="text-muted">Built with <i class="fas fa-heart"></i> by <a href="https://ejrbuss.net">ejrbuss</a>
+                    <br />
                     <a class="text-secondary" href="http://dnd.wizards.com/products/tabletop-games/rpg-products/sc-adventurers-guide">Image Credited to Sword Coast Adventurer's Guide 2015</a>
+                    <br />
+                    Found a <a href="https://github.com/ejrbuss/dnd-initiative-tracker"><i class="fas fa-bug"></i></a>?
                 </p>
             </div>
         </footer>

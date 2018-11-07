@@ -6,6 +6,7 @@ import { State } from './State';
 import { Render } from './Render';
 import { API } from './API';
 import { Template } from './Template';
+import { Keycodes } from './Keycodes';
 
 // Provide console access to APIs
 const global = window as any;
@@ -16,6 +17,7 @@ global.Util = Util;
 global.Lang = Lang;
 global.State = State;
 global.Render = Render;
+global.Template = Template;
 global.API = API;    
 
 // Jquery initializations
@@ -26,7 +28,7 @@ $(document).ready(() => {
 
     // Process commands
     $('#command').keydown(e => {
-        if (e.which === Util.keycodes.enter) {
+        if (e.which === Keycodes.enter) {
             const input = $('#command').val() as string;
             const output = Lang.evaluate(input, API);
             commandsUp.push(input);
@@ -37,7 +39,7 @@ $(document).ready(() => {
                 API.print(`${input} <i class="fas fa-arrow-right"></i> ${output}`);
             }
         }
-        if (e.which === Util.keycodes.up) {
+        if (e.which === Keycodes.up) {
             console.log(commandsUp, commandsDown);
             const text = commandsUp.pop();
             if (text !== undefined) {
@@ -45,7 +47,7 @@ $(document).ready(() => {
                 $('#command').val(text);
             }
         }
-        if (e.which === Util.keycodes.down) {
+        if (e.which === Keycodes.down) {
             console.log(commandsUp, commandsDown);
             const text = commandsDown.pop();
             if (text !== undefined) {
