@@ -6,21 +6,13 @@ You can checkout the site [here](https://ejrbuss.net/dnd-initiative-tracker)!
 
 This is a simple web application for Dungeon Masters to keep track of initiative order, monster health, and player statuses. It was built with input from [UltravioletVoodoo](https://github.com/UltravioletVoodoo).
 
-## Help
-
-Basic help
-
-### Templates
-
-Template help
-
 ### Command Language
 
 The initiative tracker has a command bar that accepts some simple commands. This can be helpful for adjusting the tracker as well as doing quick D&D calculations.
 
 The following commands are available:
 |Command|Description|Examples|
-|-|-|-|
+|---|---|---|
 |`#d#`|Roll some dice!|eg. `2d4`, `d20`|
 |`# #`|Do some math!|eg. `4 * 5`, `3 + (d20 / 2)`, `max 7, 2d6`
 |`hp±#`|Change the currently selected character's hit points.|eg.`hp-4`, `hp+12`|
