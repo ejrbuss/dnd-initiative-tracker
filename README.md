@@ -15,7 +15,7 @@ The following commands are available:
 |Command|Description|Examples|
 |---|---|---|
 |`#d#`|Roll some dice!|eg. `2d4`, `d20`|
-|`# #`|Do some math!|eg. `4 * 5`, `3 + (d20 / 2)`, `max 7, 2d6`
+|`# op #`|Do some math!|eg. `4 * 5`, `3 + (d20 / 2)`, `max 7, 2d6`
 |`hp±#`|Change the currently selected character's hit points.|eg.`hp-4`, `hp+12`|
 |`jump`|Change to the currently selected character's turn.|eg. `jump`|
 |`remove`|Remove the currnetly selected character from the initiative order.|eg. `remove`|
