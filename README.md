@@ -11,6 +11,7 @@ This is a simple web application for Dungeon Masters to keep track of initiative
 The initiative tracker has a command bar that accepts some simple commands. This can be helpful for adjusting the tracker as well as doing quick D&D calculations.
 
 The following commands are available:
+
 |Command|Description|Examples|
 |---|---|---|
 |`#d#`|Roll some dice!|eg. `2d4`, `d20`|
