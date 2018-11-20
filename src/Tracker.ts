@@ -93,6 +93,9 @@ const update = (tracker: Tracker, actor: Actor): Tracker => {
 
 
 const remove = (tracker: Tracker, actor: Actor): Tracker => {
+    if (tracker.actors.findIndex(oldActor => oldActor.uid === actor.uid) < tracker.current) {
+        tracker = previous(tracker);
+    }
     tracker = Util.merge(tracker, { actors: tracker.actors.filter(oldActor => {
         return oldActor.uid !== actor.uid;
     }) });

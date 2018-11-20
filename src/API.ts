@@ -46,7 +46,7 @@ const jump = (actor: Actor) => {
         if (tracker !== state.tracker) {
             return [
                 { tracker },
-                `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
+                `It is now ${Tracker.current(tracker).name}'s turn.`,
                 { success: true },
             ];
         }
@@ -59,7 +59,7 @@ const next = () => {
             const tracker = Tracker.next(state.tracker);
             return [
                 { tracker, selected: Tracker.current(tracker) },
-                `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
+                `It is now ${Tracker.current(tracker).name}'s turn.`,
                 { success: true },
             ];
         }
@@ -72,7 +72,7 @@ const previous = () => {
             const tracker = Tracker.previous(state.tracker);
             return [
                 { tracker, selected: Tracker.current(tracker) },
-                `It is now ${Tracker.current(State.get().tracker).name}'s turn.`,
+                `It is now ${Tracker.current(tracker).name}'s turn.`,
                 { success: true },
             ];
         }
