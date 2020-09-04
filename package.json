@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/jquery": "^3.3.30",
     "@types/showdown": "^1.9.3",
-    "showdown": "^1.9.0",
+    "showdown": "^1.9.1",
     "typescript": "^3.5.2"
   },
   "dependencies": {}
